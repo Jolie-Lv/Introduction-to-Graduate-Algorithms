@@ -15,30 +15,27 @@ def prString(myStr, n, B):
             print("{0:3d}".format(myStr[i][j]),end="")
         print()
 
-v=[15,10,8,1]
-w=[15,12,10,5]
+v=[0,15,10,8,1]
+w=[0,15,12,10,5]
 B=22
 n = len(v)
-K = [[0 for j in range(B)] for j in range(n)]
-prString(K, n, B)
-#solution w6-v30 + w4-v16  = 46
+K = [[0 for j in range(B+1)] for j in range(n)]
+#prString(K, n+1, B+1)
+#solution total value v=8 + v=10 -> 18
+#total weight 22 w=12+ w=10 -> 22
 def findMax(w, v):
     n = len(v)
-    #b total weight 
-    
-    
-    for i in range(0, n):
-        for b in range(0, B):
-            capacity = B - w[i]
-            
-            if K[i][b] > capacity:
-                continue
-        
-        K[i] = v[i] + v[i-1]
+    for i in range(1, n):
+        for b in range(1, B+1):
+            if w[i] <= b:
+                K[i][b] = max(v[i]+K[i-1][b-w[i]], K[i-1][b])
+            else:
+                K[i][b] = K[i-1][b]
 
-    print (" total values = ", K)
+    print(" total values = \n")
+    prString ( K, n, B+1)
 
-    print ("max total value = ", max(K))
+    print ("max total value = ", K[n-1][B])
 findMax(w, v)
     
     
