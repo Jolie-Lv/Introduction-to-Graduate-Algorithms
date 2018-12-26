@@ -1,9 +1,6 @@
 #graph2
 #graph
 #Bellman-Ford
-n = 10
-D= [[0 for i in range(n)]for i in range(n)]
-
 
 # Python program for Bellman-Ford's single source
 # shortest path algorithm.
